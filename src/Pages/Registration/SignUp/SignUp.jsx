@@ -1,9 +1,15 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
+import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
 
 const SignUp = () => {
-    const { register, handleSubmit, onSubmit } = useForm();
-    console.log(onSubmit);
+    const { register, handleSubmit } = useForm();
+    const onSubmit = (data) => {
+        console.log(data);
+    }
+
+
+
 
 
 
@@ -17,29 +23,39 @@ const SignUp = () => {
                 {/* first label */}
                 <div className='flex items-center gap-8 w-full'>
                     {/* first name */}
-                    <input className="text-xl w-1/2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("firstName")} placeholder='First Name' />
+                    <input className="w-1/2 outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("firstName")} placeholder='First Name' />
                     {/* last name */}
-                    <input className="text-xl w-1/2 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("lastName")} placeholder='Last Name' />
+                    <input className="w-1/2 outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("lastName")} placeholder='Last Name' />
                 </div>
                 {/* second label */}
 
                 {/* email */}
-                <input className="text-xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("email")} placeholder='Your Email' />
+                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("email")} placeholder='Your Email' />
                 {/* password */}
-                <input className="text-xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("password")} placeholder='Enter strong Password' />
+                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password")} placeholder='Enter strong Password' />
                 {/* confirm password */}
-                <input className="text-xl bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" {...register("confirmPassword")} placeholder='Confirm Password' />
+                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword")} placeholder='Confirm Password' />
+                <div className='flex items-center gap-8 w-full'>
+                    {/* gender selection */}
+                    <select className="w-full cursor-pointer rounded-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5"  {...register("gender")}>
+                        <option>Gender select</option>
+                        <option value="female">female</option>
+                        <option value="male">male</option>
+                        <option value="other">other</option>
+                    </select>
+                    {/* photo url */}
+                    <input className="block w-full text-sm text-gray-900 border-b border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400" type="file" />
 
-                {/* <label>Gender Selection</label>
-                <select {...register("gender")}>
-                    <option value="female">female</option>
-                    <option value="male">male</option>
-                    <option value="other">other</option>
-                </select> */}
-                <button type="submit" className="cursor-pointer text-white bg-primary hover:bg-secondary font-medium text-xl w-full sm:w-auto px-10  py-5 text-center "> 
-                Sign Up
+                </div>
+                <button type="submit" className="cursor-pointer text-white bg-primary hover:bg-secondary font-medium text-xl w-full sm:w-auto px-10  py-5 text-center ">
+                    Sign Up
                 </button>
             </form>
+
+            <div className='text-center'>
+                ------------OR SIGN UP WITH-----------
+            </div>
+            <SocialMedia></SocialMedia>
         </div>
     );
 };
