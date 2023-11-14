@@ -1,6 +1,9 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
+import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
 const SignUp = () => {
     const { register, handleSubmit } = useForm();
@@ -56,6 +59,7 @@ const SignUp = () => {
                 ------------OR SIGN UP WITH-----------
             </div>
             <SocialMedia></SocialMedia>
+            <h4 className='text-xl text-center mb-8'>Already have an account!! please  <Link className='underline text-primary font-bold' to={'/signIn'}>Sign In <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Link></h4>
         </div>
     );
 };

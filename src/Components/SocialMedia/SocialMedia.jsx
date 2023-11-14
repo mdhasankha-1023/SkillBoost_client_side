@@ -5,8 +5,8 @@ import React from 'react';
 const SocialMedia = () => {
     return (
         <div className='flex flex-col gap-4 my-8'>
-            <div className='flex gap-8 cursor-pointer text-xl items-center justify-center border border-gary-500 rounded-full w-[50%] p-2 mx-auto'>
-                <FontAwesomeIcon className='text-2xl' icon={faGoogle}></FontAwesomeIcon>
+            <div className='flex gap-8 cursor-pointer text-xl items-center justify-center border border-gary-500 hover:border-[#085CE8] rounded-full w-[50%] p-2 mx-auto'>
+                <FontAwesomeIcon className='text-2xl text-[#085CE8]' icon={faGoogle}></FontAwesomeIcon>
                 <p>GOOGLE</p>
             </div>
             <div className='flex gap-8 cursor-pointer text-xl items-center justify-center border border-gary-500 rounded-full w-[50%] p-2 mx-auto'>
