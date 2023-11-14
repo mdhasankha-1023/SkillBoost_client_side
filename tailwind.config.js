@@ -6,7 +6,15 @@ export default {
     "./node_modules/flowbite/**/*.js"
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        primary : "#FF1949",
+        secondary: "#252525"
+      },
+      backgroundImage: {
+        'registration-bg': "url('/src/assets/RegistrationBg/Registration.jpg')",
+      },
+    },
   },
   plugins: [
     require('flowbite/plugin')
