@@ -4,8 +4,13 @@ import {
 import Other from "../Layout/Other";
 import SignIn from "../Pages/Registration/SignIn/SignIn";
 import SignUp from "../Pages/Registration/SignUp/SignUp";
+import Main from "../Layout/Main";
 
 const router = createBrowserRouter([
+    {
+        path: '/',
+        element: <Main></Main>
+    },
     {
         path: '/',
         element: <Other></Other>,

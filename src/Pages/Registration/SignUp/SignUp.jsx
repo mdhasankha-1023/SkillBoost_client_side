@@ -35,12 +35,12 @@ const SignUp = () => {
                 {/* email */}
                 <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("email")} placeholder='Your Email' />
                 {/* password */}
-                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password")} placeholder='Enter strong Password' />
-                {/* confirm password */}
-                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword")} placeholder='Confirm Password' />
+                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password")} placeholder='Password' />
+                {/* repeat password */}
+                <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword")} placeholder='Repeat Password' />
                 <div className='flex items-center gap-8 w-full'>
                     {/* gender selection */}
-                    <select className="w-full cursor-pointer rounded-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5"  {...register("gender")}>
+                    <select className="w-full cursor-pointer outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5"  {...register("gender")}>
                         <option>Gender select</option>
                         <option value="female">female</option>
                         <option value="male">male</option>

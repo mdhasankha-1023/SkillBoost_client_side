@@ -9,7 +9,7 @@ const SocialMedia = () => {
                 <FontAwesomeIcon className='text-2xl text-[#085CE8]' icon={faGoogle}></FontAwesomeIcon>
                 <p>GOOGLE</p>
             </div>
-            <div className='flex gap-8 cursor-pointer text-xl items-center justify-center border border-gary-500 rounded-full w-[50%] p-2 mx-auto'>
+            <div className='flex gap-8 cursor-pointer text-xl items-center justify-center border border-gary-500 hover:border-[#000000] rounded-full w-[50%] p-2 mx-auto'>
                 <FontAwesomeIcon className='text-2xl' icon={faGithub}></FontAwesomeIcon>
                 <p>GITHUB</p>
             </div>

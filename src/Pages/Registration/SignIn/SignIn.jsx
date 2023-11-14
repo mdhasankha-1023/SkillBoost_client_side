@@ -36,7 +36,7 @@ const SignIn = () => {
             ------------OR SIGN IN WITH-----------
         </div>
         <SocialMedia></SocialMedia>
-        <h4 className='text-xl text-center mb-8'>You have no account? please  <Link className='underline text-primary font-bold' to={'/signUp'}>Sign Up <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Link></h4>
+        <h4 className='text-xl text-center mb-8'>Not a member yet? please  <Link className='underline text-primary font-bold' to={'/signUp'}>Sign Up <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Link></h4>
     </div>
     );
 };
