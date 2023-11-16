@@ -22,9 +22,9 @@ const PopularCourses = () => {
                 {
                     courses.map(course => <div
                         key={course.id}
-                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700">
+                        class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
                         <Link to={'/'}>
-                            <img class="rounded-t-lg h-[50%] w-full" src={course.img} alt="" />
+                            <img class="rounded-t-lg h-[50%] w-full hover:scale-105" src={course.img} alt="" />
                         </Link>
                         <div class="p-5 h-[50%]">
                             <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{course.name}</h5>

@@ -1,0 +1,51 @@
+[
+    {
+        "id" : 1,
+      "insName": "John Smith",
+      "insImg": "https://t3.ftcdn.net/jpg/05/57/35/54/360_F_557355484_m6hSlsoImUnzPQPC6d295zcFE3bsyFnF.jpg",
+      "insEmail": "johnsmith@email.com",
+      "numberOfClasses": 2,
+      "classesName": ["Introduction to Programming with Python", "Web Development with HTML, CSS, and JavaScript"]
+    },
+    {
+        "id" : 2,
+      "insName": "Jane Doe",
+      "insImg": "https://npr.brightspotcdn.com/dims4/default/f641c21/2147483647/strip/true/crop/1178x1178+0+0/resize/880x880!/quality/90/?url=http%3A%2F%2Fnpr-brightspot.s3.amazonaws.com%2Fde%2F3d%2Fb5e4ec094d449e8e0cbdf2ac503b%2Ftracieoverdorff-050622.jpg",
+      "insEmail": "janedoe@email.com",
+      "numberOfClasses": 1,
+      "classesName": ["Data Science with Python and R"]
+    },
+    {
+        "id" : 3,
+      "insName": "Peter Jones",
+      "insImg": "https://schoolsweek.co.uk/wp-content/uploads/2015/10/Chris-Husbands.jpg",
+      "insEmail": "peterjones@email.com",
+      "numberOfClasses": 1,
+      "classesName": ["Machine Learning with Python and TensorFlow"]
+    },
+    {
+        "id" : 4,
+      "insName": "Mary Smith",
+      "insImg": "https://i.insider.com/6230b6b8dc43bd0018947a5e?width=728&format=jpeg",
+      "insEmail": "marysmith@email.com",
+      "numberOfClasses": 1,
+      "classesName": ["Cybersecurity Fundamentals"]
+    },
+    {
+        "id" : 5,
+      "insName": "David Brown",
+      "insImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTT7rAmSUEBZkR5CeDnETUSKE52N_9Xf7SQIg&usqp=CAU",
+      "insEmail": "davidbrown@email.com",
+      "numberOfClasses": 1,
+      "classesName": ["Introduction to Artificial Intelligence"]
+    },
+    {
+        "id" : 6,
+      "insName": "Sarah Lee",
+      "insImg": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT351XVy_rUEwGgMEDKKzEqiUfXKGHKB-5BhQ&usqp=CAU",
+      "insEmail": "sarahlee@email.com",
+      "numberOfClasses": 1,
+      "classesName": ["Ethical Hacking"]
+    }
+  ]
+  
