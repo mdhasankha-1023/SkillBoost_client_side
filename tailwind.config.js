@@ -13,6 +13,9 @@ export default {
       },
       backgroundImage: {
         'registration-bg': "url('/src/assets/RegistrationBg/Registration.jpg')",
+        'slide1-bg': "url('/src/assets/slider/slide1.jpg')",
+        'slide2-bg': "url('/src/assets/slider/slide2.jpg')",
+        'slide3-bg': "url('/src/assets/slider/slide3.jpg')"
       },
     },
   },

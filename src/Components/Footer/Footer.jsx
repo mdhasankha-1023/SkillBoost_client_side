@@ -16,7 +16,7 @@ const Footer = () => {
                             <img src={logo} className="h-16 me-3" alt="SkillBoost Logo" />
                             <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
                                 <span className='text-primary'>Skill</span>
-                                <span className='text-secondary'>Boost</span>
+                                <span className='text-white'>Boost</span>
                             </span>
                         </Link>
                         <ul className="text-white dark:text-gray-400 font-medium">

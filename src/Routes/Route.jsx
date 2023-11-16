@@ -5,11 +5,18 @@ import Other from "../Layout/Other";
 import SignIn from "../Pages/Registration/SignIn/SignIn";
 import SignUp from "../Pages/Registration/SignUp/SignUp";
 import Main from "../Layout/Main";
+import Home from "../Pages/Home/Home";
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <Main></Main>
+        element: <Main></Main>,
+        children: [
+            {
+                path: '/',
+                element: <Home></Home>
+            }
+        ]
     },
     {
         path: '/',
