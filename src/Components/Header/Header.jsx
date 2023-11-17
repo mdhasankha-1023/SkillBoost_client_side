@@ -1,14 +1,25 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import logo from '../../assets/logo/SKILL Boost.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
-    const [user, setUser] = useState(true)
+    const {user, signOutUser, successModal,
+        errorModal,} = useContext(AuthContext);
     const [avatar, setAvatar] = useState(false);
     const [barClick, setBarClick] = useState(false);
-    console.log(avatar, barClick);
+    console.log(user);
+
+    // handle signOut btn
+    const handleSignOutBtn = () => {
+        signOutUser()
+        .then(res => {
+            successModal('Sign-out successfully')
+        })
+        .catch(err => errorModal(err.message))
+    }
 
     return (
         <nav className="bg-white border-gray-200 dark:bg-gray-900">
@@ -21,7 +32,7 @@ const Header = () => {
                     </span>
                 </Link>
                 <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse relative">
-                    {user ?
+                    {!user ?
                         <div>
                             <Link to={'/signIn'}>
                                 <button type="button" class="py-2.5 px-5 me-2 mb-2 text-sm font-medium text-secondary  bg-white border border-secondary hover:bg-secondary hover:text-white ">Sign In</button>
@@ -35,28 +46,25 @@ const Header = () => {
                             <button onClick={() => setAvatar(!avatar)} type="button" className="lg:flex hidden text-sm bg-gray-800 rounded-full md:me-0 focus:ring-4 focus:ring-gray-300 dark:focus:ring-gray-600" data-dropdown-toggle="user-dropdown"
                                 data-dropdown-placement="bottom">
                                 <span className="sr-only">Open user menu</span>
-                                <img className="w-8 h-8 rounded-full" src="/docs/images/people/profile-picture-3.jpg" alt="user photo" />
+                                <img className="w-8 h-8 rounded-full" src={user?.photoURL} alt="user photo" />
                             </button>
                             {/* <!-- Dropdown menu --> */}
                             <div className={avatar ? 'absolute top-[80%] right-[5%] z-50 my-4 text-base list-none bg-white divide-y divide-gray-100 rounded-lg shadow dark:bg-gray-700 dark:divide-gray-600'
                                 :
                                 'hidden'}>
                                 <div className="px-4 py-3">
-                                    <span className="block text-sm text-gray-900 dark:text-white">Bonnie Green</span>
-                                    <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">name@flowbite.com</span>
+                                    <span className="block text-sm text-gray-900 dark:text-white">{user?.displayName}</span>
+                                    <span className="block text-sm  text-gray-500 truncate dark:text-gray-400">{user?.email}</span>
                                 </div>
                                 <ul className="py-2" aria-labelledby="user-menu-button">
+                                    <li>
+                                        <Link  className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Profile</Link>
+                                    </li>
                                     <li>
                                         <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Dashboard</a>
                                     </li>
                                     <li>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Settings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Earnings</a>
-                                    </li>
-                                    <li>
-                                        <a href="#" className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign out</a>
+                                        <a onClick={handleSignOutBtn} type='button' className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white cursor-pointer">Sign out</a>
                                     </li>
                                 </ul>
                             </div>

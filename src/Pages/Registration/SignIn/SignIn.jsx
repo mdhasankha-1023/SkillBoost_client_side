@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
@@ -10,6 +10,7 @@ const SignIn = () => {
     const { google, github, logInWithEmailAndPassword, successModal,
         errorModal, } = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
+    const navigate = useNavigate();
 
     // form data
     const onSubmit = (data) => {
@@ -23,6 +24,7 @@ const SignIn = () => {
                 console.log(result);
                 successModal('SignIn Successfully')
                 reset();
+                navigate('/')
             })
             .catch(err => errorModal(err.message))
     }
@@ -33,7 +35,8 @@ const SignIn = () => {
             .then(res => {
                 const result = res.user;
                 console.log(result);
-                successModal('SignIn successfully')
+                successModal('SignIn successfully');
+                navigate('/')
             })
             .catch(err => errorModal(err.message))
     }
@@ -44,7 +47,8 @@ const SignIn = () => {
             .then(res => {
                 const result = res.user;
                 console.log(result);
-                successModal('SignIn successfully')
+                successModal('SignIn successfully'),
+                navigate('/')
             })
             .catch(err => errorModal(err.message))
     }

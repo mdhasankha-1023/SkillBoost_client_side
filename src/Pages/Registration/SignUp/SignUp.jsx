@@ -1,7 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
@@ -9,7 +9,8 @@ import { AuthContext } from '../../../AuthProvider/AuthProvider';
 const SignUp = () => {
     const {google, github, signUpWithEmailAndPassword, successModal, errorModal} = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
-    const newPassword = watch('password')
+    const newPassword = watch('password');
+    const navigate = useNavigate();
 
     // form data
     const onSubmit = (data) => {
@@ -22,7 +23,8 @@ const SignUp = () => {
             const result = res.user;
             console.log(result);
             successModal('Account created Successfully');
-            reset()
+            reset();
+            navigate('/')
         })
         .catch(err => errorModal(err.message))
     }
@@ -33,7 +35,8 @@ const SignUp = () => {
         .then(res => {
             const result = res.user;
             console.log(result);
-            successModal('Account created Successfully')
+            successModal('Account created Successfully');
+            navigate('/')
         })
         .catch(err => errorModal(err.message))
     }
@@ -44,7 +47,8 @@ const SignUp = () => {
         .then(res => {
             const result = res.user;
             console.log(result);
-            successModal('Account created Successfully')
+            successModal('Account created Successfully');
+            navigate('/')
         })
         .catch(err => errorModal(err.message))
     }

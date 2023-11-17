@@ -1,5 +1,5 @@
-import React, { createContext, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import React, { createContext, useEffect, useState } from 'react';
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../Firebase/firebase.config';
 import Swal from 'sweetalert2';
 
@@ -63,6 +63,18 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
+
+    // user contain in the useEffect
+    useEffect(() => {
+        const unSubscribe = onAuthStateChanged(auth, currentUser => {
+            setLoading(false)
+            setUser(currentUser);
+        }) 
+
+        return () => {
+            return unSubscribe();``
+        }
+    } , [])
 
     // signOut user
     const signOutUser = () => {
