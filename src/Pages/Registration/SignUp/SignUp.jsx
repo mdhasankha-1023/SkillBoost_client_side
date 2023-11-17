@@ -17,7 +17,7 @@ const SignUp = () => {
 
 
     return (
-        <div className='w-[90%] bg-white my-8 flex'>
+        <div className='w-[80%] bg-white my-8 flex'>
             <div className='bg-primary p-16 w-1/2 flex items-center'>
                 <h2 className='text-white font-bold text-4xl uppercase text-center leading-tight tracking-wider'>Are you ready for This challang</h2>
             </div>
