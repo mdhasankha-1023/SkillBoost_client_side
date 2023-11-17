@@ -7,7 +7,7 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const SignIn = () => {
-    const {google} = useContext(AuthContext);
+    const {google, github} = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const onSubmit = (data) => {
         console.log(data);
@@ -16,6 +16,16 @@ const SignIn = () => {
     // handle google btn
     const handleGoogleBtn = () => {
         google()
+        .then(res => {
+            const result = res.user;
+            console.log(result);
+        })
+        .catch(err => console.log(err.message))
+    }
+
+    // handle github btn
+    const handleGithubBtn = () => {
+        github()
         .then(res => {
             const result = res.user;
             console.log(result);
@@ -48,7 +58,7 @@ const SignIn = () => {
                 <div className='text-center'>
                     ------------OR SIGN IN WITH-----------
                 </div>
-                <SocialMedia handler={handleGoogleBtn}></SocialMedia>
+                <SocialMedia githubHandler={handleGithubBtn} googleHandler={handleGoogleBtn}></SocialMedia>
                 <h4 className='text-xl text-center mb-8'>Not a member yet? please  <Link className='underline text-primary font-bold' to={'/signUp'}>Sign Up <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Link></h4>
             </div>
         </div>
