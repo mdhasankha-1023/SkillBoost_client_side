@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
 import { Link } from 'react-router-dom';
@@ -7,10 +7,24 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const SignUp = () => {
-    const {google, github} = useContext(AuthContext);
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const {google, github, signUpWithEmailAndPassword, successModal, errorModal} = useContext(AuthContext);
+    const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
+    const newPassword = watch('password')
+
+    // form data
     const onSubmit = (data) => {
-        console.log(data);
+        const {fullName, email, gender, confirmPassword, password, photoUrl} = data;
+        const img = photoUrl[0].name;
+
+        // authentication with email and password
+        signUpWithEmailAndPassword(email, password)
+        .then(res => {
+            const result = res.user;
+            console.log(result);
+            successModal('Account created Successfully');
+            reset()
+        })
+        .catch(err => errorModal(err.message))
     }
 
     // handle google btn
@@ -19,8 +33,9 @@ const SignUp = () => {
         .then(res => {
             const result = res.user;
             console.log(result);
+            successModal('Account created Successfully')
         })
-        .catch(err => console.log(err.message))
+        .catch(err => errorModal(err.message))
     }
 
     // handle github btn
@@ -29,13 +44,10 @@ const SignUp = () => {
         .then(res => {
             const result = res.user;
             console.log(result);
+            successModal('Account created Successfully')
         })
-        .catch(err => console.log(err.message))
+        .catch(err => errorModal(err.message))
     }
-
-
-    console.log(errors);
-
 
 
     return (
@@ -72,8 +84,11 @@ const SignUp = () => {
                         </div>
                         {/* repeat password */}
                         <div className='w-1/2'>
-                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword", { required: 'Password not matching' })} placeholder='Repeat Password' />
-                            {errors.confirmPassword && <p role="alert" className='text-red-500 font-bold mt-2 text-md'>{errors.confirmPassword.message}</p>}
+                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword", { required: 'Password not matching', validate : (value) => {
+                                return value == newPassword || 'Password not matching' 
+                            }})} placeholder='Repeat Password' />
+                            {errors.confirmPassword && <p className='text-red-500 font-bold mt-2 text-md'>{errors.confirmPassword.message}</p>}
+                            
                         </div>
                     </div>
 

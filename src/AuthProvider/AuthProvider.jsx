@@ -1,6 +1,7 @@
 import React, { createContext, useState } from 'react';
-import { GithubAuthProvider, GoogleAuthProvider, getAuth, signInWithPopup } from "firebase/auth";
+import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 import app from '../Firebase/firebase.config';
+import Swal from 'sweetalert2';
 
 export const AuthContext = createContext();
 
@@ -14,6 +15,30 @@ const githubProvider = new GithubAuthProvider();
 const AuthProvider = ({children}) => {
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
+
+    // success modal
+    const successModal = (text) => {
+        Swal.fire({
+            position: "center",
+            icon: "success",
+            title: `${text}`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
+
+    // error modal
+    const errorModal = (text) => {
+        Swal.fire({
+            position: "center",
+            icon: "error",
+            title: `${text}`,
+            showConfirmButton: false,
+            timer: 1500
+          });
+    }
+
+
     
     // authenticate with google
     const google = () => {
@@ -26,12 +51,35 @@ const AuthProvider = ({children}) => {
         setLoading(true)
         return signInWithPopup(auth, githubProvider)
     }
+
+    // signUp with email and password
+    const signUpWithEmailAndPassword = (email, password) => {
+        setLoading(true)
+        return createUserWithEmailAndPassword(auth, email, password)
+    }
+
+    // signIn with email and password
+    const logInWithEmailAndPassword = (email, password) => {
+        setLoading(true)
+        return signInWithEmailAndPassword(auth, email, password)
+    }
+
+    // signOut user
+    const signOutUser = () => {
+        setLoading(true)
+        return signOut(auth)
+    }
     
     const authInfo = {
         user,
         loading,
         google,
-        github
+        github,
+        signUpWithEmailAndPassword,
+        logInWithEmailAndPassword,
+        signOutUser,
+        successModal,
+        errorModal
     }
     
     return (
