@@ -73,13 +73,13 @@ const AuthProvider = ({children}) => {
     const authInfo = {
         user,
         loading,
+        successModal,
+        errorModal,
         google,
         github,
         signUpWithEmailAndPassword,
         logInWithEmailAndPassword,
         signOutUser,
-        successModal,
-        errorModal
     }
     
     return (

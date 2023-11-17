@@ -7,30 +7,46 @@ import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const SignIn = () => {
-    const {google, github} = useContext(AuthContext);
-    const { register, handleSubmit } = useForm();
+    const { google, github, logInWithEmailAndPassword, successModal,
+        errorModal, } = useContext(AuthContext);
+    const { register, handleSubmit, reset, formState: { errors } } = useForm();
+
+    // form data
     const onSubmit = (data) => {
-        console.log(data);
+        const { email, password } = data;
+        console.log(email, password);
+
+        // authentication with email and password
+        logInWithEmailAndPassword()
+            .then(res => {
+                const result = res.user;
+                console.log(result);
+                successModal('SignIn Successfully')
+                reset();
+            })
+            .catch(err => errorModal(err.message))
     }
 
     // handle google btn
     const handleGoogleBtn = () => {
         google()
-        .then(res => {
-            const result = res.user;
-            console.log(result);
-        })
-        .catch(err => console.log(err.message))
+            .then(res => {
+                const result = res.user;
+                console.log(result);
+                successModal('SignIn successfully')
+            })
+            .catch(err => errorModal(err.message))
     }
 
     // handle github btn
     const handleGithubBtn = () => {
         github()
-        .then(res => {
-            const result = res.user;
-            console.log(result);
-        })
-        .catch(err => console.log(err.message))
+            .then(res => {
+                const result = res.user;
+                console.log(result);
+                successModal('SignIn successfully')
+            })
+            .catch(err => errorModal(err.message))
     }
 
 
@@ -47,9 +63,17 @@ const SignIn = () => {
                     {/* first label */}
 
                     {/* email */}
-                    <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("email")} placeholder='Email' />
+                    <div className='w-full'>
+                        <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("email", { required: 'Please fill this field' })} placeholder='Email' />
+                        {errors.email && <p role="alert" className='text-red-500 font-bold mt-2 text-md'>{errors.email.message}</p>}
+                    </div>
+
                     {/* password */}
-                    <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password")} placeholder='Password' />
+                    <div className='w-full'>
+                        <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password", { required: 'Please fill this field' })} placeholder='Password' />
+                        {errors.password && <p role="alert" className='text-red-500 font-bold mt-2 text-md'>{errors.password.message}</p>}
+                    </div>
+
                     <button type="submit" className="cursor-pointer text-white bg-primary hover:bg-secondary font-medium text-xl w-full sm:w-auto px-10  py-5 text-center ">
                         Sign In
                     </button>
