@@ -1,14 +1,26 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { useForm } from 'react-hook-form';
 import SocialMedia from '../../../Components/SocialMedia/SocialMedia';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
+import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const SignIn = () => {
+    const {google} = useContext(AuthContext);
     const { register, handleSubmit } = useForm();
     const onSubmit = (data) => {
         console.log(data);
+    }
+
+    // handle google btn
+    const handleGoogleBtn = () => {
+        google()
+        .then(res => {
+            const result = res.user;
+            console.log(result);
+        })
+        .catch(err => console.log(err.message))
     }
 
 
@@ -36,7 +48,7 @@ const SignIn = () => {
                 <div className='text-center'>
                     ------------OR SIGN IN WITH-----------
                 </div>
-                <SocialMedia></SocialMedia>
+                <SocialMedia handler={handleGoogleBtn}></SocialMedia>
                 <h4 className='text-xl text-center mb-8'>Not a member yet? please  <Link className='underline text-primary font-bold' to={'/signUp'}>Sign Up <FontAwesomeIcon icon={faArrowRight}></FontAwesomeIcon></Link></h4>
             </div>
         </div>
