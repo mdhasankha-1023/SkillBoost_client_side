@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 import logo from '../../assets/logo/SKILL Boost.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBars } from '@fortawesome/free-solid-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 
 const Header = () => {
@@ -10,13 +10,15 @@ const Header = () => {
         errorModal,} = useContext(AuthContext);
     const [avatar, setAvatar] = useState(false);
     const [barClick, setBarClick] = useState(false);
-    console.log(user);
+    const navigate = useNavigate();
+    // console.log(user);
 
     // handle signOut btn
     const handleSignOutBtn = () => {
         signOutUser()
         .then(res => {
             successModal('Sign-out successfully')
+            navigate('/signIn')
         })
         .catch(err => errorModal(err.message))
     }
