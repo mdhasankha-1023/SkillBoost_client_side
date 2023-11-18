@@ -7,8 +7,10 @@ import { Link } from 'react-router-dom';
 const PopularCourses = () => {
     const [courses, setCourses] = useState([]);
     console.log(courses);
+
+    // fetch popular courses
     useEffect(() => {
-        fetch('/public/courses.json')
+        fetch('http://localhost:5000/courses')
             .then(res => res.json())
             .then(data => setCourses(data))
     }, [])

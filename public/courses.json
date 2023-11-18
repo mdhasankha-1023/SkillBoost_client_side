@@ -1,6 +1,5 @@
 [
     {
-        "id": 1,
         "img": "https://media.istockphoto.com/id/1284202542/vector/programming-language-python-conceptual-banner-education-coding-computer-language-python.jpg?s=612x612&w=0&k=20&c=DwTB320vMYH8MAnPjrwEeJqlWs1V4y10ExC0xcMmHig=",
         "name": "Programming with Python",
         "instructorName": "John Smith",
@@ -9,7 +8,6 @@
         "price": 199
       },
       {
-        "id": 2,
         "img": "https://www.elegantthemes.com/blog/wp-content/uploads/2018/12/top11.png",
         "name": "Web Development",
         "instructorName": "Jane Doe",
@@ -18,7 +16,6 @@
         "price": 249
       },
       {
-        "id": 3,
         "img": "https://ik.imagekit.io/upgrad1/marketing-platform-assets/new-images%2Fprogram-backgrounds%2Funiversity/BannerImage__1685998669259.png",
         "name": "Data Science",
         "instructorName": "Peter Jones",
@@ -27,7 +24,6 @@
         "price": 299
       },
       {
-        "id": 4,
         "img": "https://img.freepik.com/premium-photo/future-artificial-intelligence-robot-cyborg_31965-6980.jpg",
         "name": "Machine Learning",
         "instructorName": "Mary Smith",
@@ -36,7 +32,6 @@
         "price": 349
       },
       {
-        "id": 5,
         "img": "https://reciprocity.com/wp-content/uploads/2021/08/blog_what-is-cybersecurity-framework_featured-img_730x270.jpg",
         "name": "Cybersecurity",
         "instructorName": "David Brown",

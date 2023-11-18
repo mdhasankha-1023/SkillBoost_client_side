@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import PageHeader from '../../Components/PageHeader/PageHeader';
 import PrimaryTitle from '../../Components/PrimaryTitle/PrimaryTitle';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
+import useFetch from '../../Hooks/useFetch';
 
 const Courses = () => {
-    const [courses, setCourses] = useState([]);
-    useEffect(() => {
-        fetch('/public/courses.json')
-            .then(res => res.json())
-            .then(data => setCourses(data))
-    }, [])
-    console.log(courses);
+    // const courses = useLoaderData();
+    const [data, isPending ] = useFetch();  
+    
+    console.log(data);
+
+    if(isPending){
+        return <span className='text-xl'>Loading...</span>
+    }
 
     return (
         <div>
@@ -19,8 +21,8 @@ const Courses = () => {
                 <PrimaryTitle text={'All Courses'}></PrimaryTitle>
                 <div className='grid grid-cols-3 gap-y-16 my-20 justify-items-center'>
                     {
-                        courses.map(course => <div
-                            key={course.id}
+                        data?.map(course => <div
+                            key={course._id}
                             class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
                             <Link to={'/courses'}>
                                 <img class="rounded-t-lg h-[50%] w-full hover:scale-105" src={course.img} alt="" />

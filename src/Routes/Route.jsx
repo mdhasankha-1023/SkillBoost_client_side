@@ -28,7 +28,8 @@ const router = createBrowserRouter([
             },
             {
                 path: '/courses',
-                element: <Courses></Courses>
+                element: <Courses></Courses>,
+                loader: () => fetch('http://localhost:5000/courses')
             },
             {
                 path: '/instructors',
@@ -58,35 +59,35 @@ const router = createBrowserRouter([
 
             // student pages
             {
-                path: '/enrolled-classes',
+                path: '/dashboard/enrolled-classes',
                 element: <EnrolledClasses></EnrolledClasses>
             },
             {
-                path: '/selected-classes',
+                path: '/dashboard/selected-classes',
                 element: <SelectedClasses></SelectedClasses>
             },
             {
-                path: '/payment-history',
+                path: '/dashboard/payment-history',
                 element: <PaymentHistory></PaymentHistory>
             },
 
             // instructors pages
             {
-                path: '/add-class',
+                path: '/dashboard/add-class',
                 element: <AddClass></AddClass>
             },
             {
-                path: '/my-classes',
+                path: '/dashboard/my-classes',
                 element: <MyClasses></MyClasses>
             },
 
             // admin pages
             {
-                path: '/manage-users',
+                path: '/dashboard/manage-users',
                 element: <ManageUsers></ManageUsers>
             },
             {
-                path: '/manage-classes',
+                path: '/dashboard/manage-classes',
                 element: <ManageClasses></ManageClasses>
             }
 
