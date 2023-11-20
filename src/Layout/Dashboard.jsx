@@ -1,4 +1,4 @@
-import { faBook, faChalkboardTeacher, faHouse, faPenToSquare, faRightFromBracket, faRightToBracket, faTachometerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faChalkboardTeacher, faHouse, faPenToSquare, faRightFromBracket, faRightToBracket, faTachometerAlt, faUserAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -12,13 +12,70 @@ const Dashboard = () => {
     // handle sign out btn
     const handleSignOUtBtn = () => {
         signOutUser()
-        .then(res => {
-            successModal('Sign-out successfully');
-            navigate('/signIn')
-        })
-        .catch(err => errorModal(err.message))
+            .then(res => {
+                successModal('Sign-out successfully');
+                navigate('/signIn')
+            })
+            .catch(err => errorModal(err.message))
     }
 
+
+    // student pages
+    const studentPages = <>
+        <li>
+            <Link to={'/dashboard/selected-classes'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <span className="ms-3">Selected Classes</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashboard/enrolled-classes'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <span className="ms-3">Enrolled Classes</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashboard/payment-history'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <span className="ms-3">Payment History</span>
+            </Link>
+        </li>
+    </>
+
+    // instructor pages
+    const instructorPages = <>
+        <li>
+            <Link to={'/dashboard/add-class'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <span className="ms-3">Add class</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashboard/my-classes'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <span className="ms-3">My classes</span>
+            </Link>
+        </li>
+    </>
+
+    // admin pages
+    const adminPages = <>
+        <li>
+            <Link to={'/dashboard/manage-classes'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faBookOpen}></FontAwesomeIcon>
+                <span className="ms-3">Manage classes</span>
+            </Link>
+        </li>
+        <li>
+            <Link to={'/dashboard/manage-users'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
+                <FontAwesomeIcon icon={faUsers}></FontAwesomeIcon>
+                <span className="ms-3">Manage users</span>
+            </Link>
+        </li>
+    </>
+
+    // fack user
+    const currentUser = 'admin';
 
 
     return (
@@ -36,7 +93,7 @@ const Dashboard = () => {
 
                     {/* dashboard link */}
                     <ul className="space-y-2 font-medium">
-
+                        
                         {/* dashboard */}
                         <li>
                             <Link to={'/dashboard'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
@@ -45,6 +102,15 @@ const Dashboard = () => {
                             </Link>
                         </li>
 
+                        {/* dynamic pages */}
+
+                        {/* {studentPages} */}
+
+                        {currentUser === 'student' && studentPages}
+                        {currentUser === 'instructor' && instructorPages}
+                        {currentUser === 'admin' && adminPages}
+
+                    {/* signIn, signUp and signOut btn */}
                         {!user ?
                             <>
                                 {/* signIn */}
@@ -65,7 +131,7 @@ const Dashboard = () => {
                             </>
                             :
                             <>
-                            {/* signOut */}
+                                {/* signOut */}
                                 <li >
                                     <a onClick={handleSignOUtBtn} type='button' className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group cursor-pointer">
                                         <FontAwesomeIcon icon={faRightFromBracket}></FontAwesomeIcon>
@@ -106,7 +172,7 @@ const Dashboard = () => {
                     </ul>
                 </div>
             </aside >
-            
+
             {/* main content */}
             <div className="p-4 sm:ml-64">
                 <div className="p-4 border-2 border-gray-200 border-dashed rounded-lg dark:border-gray-700">

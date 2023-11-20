@@ -8,7 +8,6 @@ import Main from "../Layout/Main";
 import Home from "../Pages/Home/Home";
 import Courses from "../Pages/Courses/Courses";
 import Instructors from "../Pages/Instructors/Instructors";
-import Dashboard from "../Layout/DashBoard";
 import EnrolledClasses from "../Pages/DashboardPage/StudentDashboard/EnrolledClasses/EnrolledClasses";
 import SelectedClasses from "../Pages/DashboardPage/StudentDashboard/SelectedClasses/SelectedClasses";
 import PaymentHistory from "../Pages/DashboardPage/StudentDashboard/PaymentHistory/PaymentHistory";
@@ -16,6 +15,9 @@ import AddClass from "../Pages/DashboardPage/InstructorsDashboard/AddClass/AddCl
 import MyClasses from "../Pages/DashboardPage/InstructorsDashboard/MyClasses/MyClasses";
 import ManageUsers from "../Pages/DashboardPage/AdminDashboard/ManageUsers/ManageUsers";
 import ManageClasses from "../Pages/DashboardPage/AdminDashboard/ManageClasses/ManageClasses";
+import Dashboard from "../Layout/Dashboard";
+import UserDashboard from "../Pages/DashboardPage/UserDashboard/UserDashboard";
+import UserProfile from "../Pages/DashboardPage/UserProfile/UserProfile";
 
 const router = createBrowserRouter([
     {
@@ -56,6 +58,16 @@ const router = createBrowserRouter([
         path: '/dashboard',
         element: <Dashboard></Dashboard>,
         children: [
+
+            // other pages
+            {
+                path: '/dashboard',
+                element: <UserDashboard></UserDashboard>
+            },
+            {
+                path: '/dashboard/user-profile',
+                element: <UserProfile></UserProfile>
+            },
 
             // student pages
             {
