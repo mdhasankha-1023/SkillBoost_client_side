@@ -8,9 +8,11 @@ import { AuthContext } from '../../../AuthProvider/AuthProvider';
 
 const SignIn = () => {
     const { google, github, logInWithEmailAndPassword, successModal,
-        errorModal, } = useContext(AuthContext);
+        errorModal, user} = useContext(AuthContext);
     const { register, handleSubmit, reset, formState: { errors } } = useForm();
     const navigate = useNavigate();
+
+    // console.log(user);
 
     // form data
     const onSubmit = (data) => {
@@ -18,7 +20,7 @@ const SignIn = () => {
         console.log(email, password);
 
         // authentication with email and password
-        logInWithEmailAndPassword()
+        logInWithEmailAndPassword(email, password)
             .then(res => {
                 const result = res.user;
                 console.log(result);
@@ -34,9 +36,29 @@ const SignIn = () => {
         google()
             .then(res => {
                 const result = res.user;
-                console.log(result);
-                successModal('SignIn successfully');
-                navigate('/')
+                // console.log(result);
+                const userInfo = {
+                    name: result.displayName,
+                    picture: result.photoURL,
+                    email: result.email,
+                    role: 'student',
+                    gender: null
+                }   
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                            successModal('Login successfully');
+                            navigate('/')
+                        
+                    })
+                    .catch(err => errorModal(err.message))
             })
             .catch(err => errorModal(err.message))
     }
@@ -46,9 +68,28 @@ const SignIn = () => {
         github()
             .then(res => {
                 const result = res.user;
-                console.log(result);
-                successModal('SignIn successfully'),
-                navigate('/')
+                // console.log(result);
+                const userInfo = {
+                    name: result.displayName,
+                    picture: result.photoURL,
+                    email: result.email,
+                    role: 'student',
+                    gender: null
+                }   
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                            successModal('Login Successfully');
+                            navigate('/')
+                    })
+                    .catch(err => errorModal(err.message))
             })
             .catch(err => errorModal(err.message))
     }

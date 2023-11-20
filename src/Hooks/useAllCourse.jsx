@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 
-const useFetch = () => {
+const useAllCourse = () => {
 
     // start query fetch
     const { isPending, isError, data, error } = useQuery({
         queryKey: ['classes'],
         queryFn: async () => {
-            const res = await fetch('http://localhost:5000/courses')
+            const res = await fetch(`http://localhost:5000/courses`)
             return res.json();
         }
     })
@@ -16,4 +16,4 @@ const useFetch = () => {
     return [data, isPending]
 };
 
-export default useFetch;
+export default useAllCourse;

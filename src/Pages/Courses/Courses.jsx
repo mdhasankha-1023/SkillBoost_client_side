@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import PageHeader from '../../Components/PageHeader/PageHeader';
 import PrimaryTitle from '../../Components/PrimaryTitle/PrimaryTitle';
 import { Link, useLoaderData } from 'react-router-dom';
-import useFetch from '../../Hooks/useFetch';
+import useAllCourse from '../../Hooks/useAllCourse';
 
 const Courses = () => {
-    // const courses = useLoaderData();
-    const [data, isPending ] = useFetch();  
+    const [data, isPending ] = useAllCourse();  
     
     console.log(data);
 

@@ -5,52 +5,118 @@ import { Link, useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 import { AuthContext } from '../../../AuthProvider/AuthProvider';
+import { data } from 'autoprefixer';
 
 const SignUp = () => {
-    const {google, github, signUpWithEmailAndPassword, successModal, errorModal} = useContext(AuthContext);
+    const { google, github, signUpWithEmailAndPassword, successModal, errorModal } = useContext(AuthContext);
     const { register, handleSubmit, formState: { errors }, watch, reset } = useForm();
     const newPassword = watch('password');
     const navigate = useNavigate();
-
     // form data
     const onSubmit = (data) => {
-        const {fullName, email, gender, confirmPassword, password, photoUrl} = data;
+        const { fullName, email, gender, confirmPassword, password, photoUrl } = data;
         const img = photoUrl[0].name;
+        const userInfo = {
+            name: fullName,
+            email: email,
+            role: 'student',
+            gender: gender,
+            picture: photoUrl
+        }
 
         // authentication with email and password
         signUpWithEmailAndPassword(email, password)
-        .then(res => {
-            const result = res.user;
-            console.log(result);
-            successModal('Account created Successfully');
-            reset();
-            navigate('/')
-        })
-        .catch(err => errorModal(err.message))
+            .then(res => {
+                const result = res.user;
+                console.log(result);
+
+                // post userInfo in server
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.insertedId) {
+                            successModal('Account created Successfully. Please log-in');
+                            navigate('/signIn')
+                            reset();
+                        }
+                        else {
+                            successModal(data.message)
+                        }
+                    })
+                    .catch(err => errorModal(err.message))
+            })
+            .catch(err => errorModal(err.message))
     }
 
     // handle google btn
     const handleGoogleBtn = () => {
         google()
-        .then(res => {
-            const result = res.user;
-            console.log(result);
-            successModal('Account created Successfully');
-            navigate('/')
-        })
-        .catch(err => errorModal(err.message))
+            .then(res => {
+                const result = res.user;
+                console.log(result);
+                const userInfo = {
+                    name: result.displayName,
+                    picture: result.photoURL,
+                    email: result.email,
+                    role: 'student',
+                    gender: null
+                }
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        successModal('Login Successfully');
+                        navigate('/')
+                    })
+                    .catch(err => errorModal(err.message))
+            })
+            .catch(err => errorModal(err.message))
     }
 
     // handle github btn
     const handleGithubBtn = () => {
         github()
-        .then(res => {
-            const result = res.user;
-            console.log(result);
-            successModal('Account created Successfully');
-            navigate('/')
-        })
-        .catch(err => errorModal(err.message))
+            .then(res => {
+                const result = res.user;
+                // console.log(result);
+                const userInfo = {
+                    name: result.displayName,
+                    picture: result.photoURL,
+                    email: result.email,
+                    role: 'student',
+                    gender: null
+                }
+
+                // console.log(userInfo);
+                fetch('http://localhost:5000/users', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(userInfo)
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        successModal('');
+                        navigate('/')
+                    })
+                    .catch(err => errorModal(err.message))
+            })
+            .catch(err => errorModal(err.message))
     }
 
 
@@ -79,20 +145,24 @@ const SignUp = () => {
                     <div className='flex items-center gap-8 w-full'>
                         {/* password */}
                         <div className='w-1/2'>
-                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password", { required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 8 characters long' }, pattern: {
-                                value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#]).{6,}$/,
-                                message: 'Password must contain at least one uppercase letter, one lowercase letter, and @/#'
-                            } })}
+                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("password", {
+                                required: 'Password is required', minLength: { value: 6, message: 'Password must be at least 8 characters long' }, pattern: {
+                                    value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*[@#]).{6,}$/,
+                                    message: 'Password must contain at least one uppercase letter, one lowercase letter, and @/#'
+                                }
+                            })}
                                 placeholder='Password' />
                             {errors.password && <p role="alert" className='text-red-500 font-bold mt-2 text-md'>{errors.password.message}</p>}
                         </div>
                         {/* repeat password */}
                         <div className='w-1/2'>
-                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword", { required: 'Password not matching', validate : (value) => {
-                                return value == newPassword || 'Password not matching' 
-                            }})} placeholder='Repeat Password' />
+                            <input className="w-full outline-none border-b border-gray-300 text-gray-900 text-lg block p-2.5" {...register("confirmPassword", {
+                                required: 'Password not matching', validate: (value) => {
+                                    return value == newPassword || 'Password not matching'
+                                }
+                            })} placeholder='Repeat Password' />
                             {errors.confirmPassword && <p className='text-red-500 font-bold mt-2 text-md'>{errors.confirmPassword.message}</p>}
-                            
+
                         </div>
                     </div>
 
