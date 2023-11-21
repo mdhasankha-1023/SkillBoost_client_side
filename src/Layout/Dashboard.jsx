@@ -1,4 +1,4 @@
-import { faBook, faBookOpen, faChalkboardTeacher, faHouse, faPenToSquare, faRightFromBracket, faRightToBracket, faTachometerAlt, faUserAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
+import { faBook, faBookOpen, faChalkboardTeacher, faHouse, faPenToSquare, faPlus, faRightFromBracket, faRightToBracket, faTachometerAlt, faUserAlt, faUsers } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React, { useContext } from 'react';
 import { Link, Outlet, useNavigate } from 'react-router-dom';
@@ -46,13 +46,13 @@ const Dashboard = () => {
     const instructorPages = <>
         <li>
             <Link to={'/dashboard/add-class'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faPlus}></FontAwesomeIcon>
                 <span className="ms-3">Add class</span>
             </Link>
         </li>
         <li>
             <Link to={'/dashboard/my-classes'} className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group">
-                <FontAwesomeIcon icon={faTachometerAlt}></FontAwesomeIcon>
+                <FontAwesomeIcon icon={faBook}></FontAwesomeIcon>
                 <span className="ms-3">My classes</span>
             </Link>
         </li>
@@ -75,7 +75,7 @@ const Dashboard = () => {
     </>
 
     // fack user
-    const currentUser = 'admin';
+    const currentUser = 'instructor';
 
 
     return (

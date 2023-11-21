@@ -65,33 +65,33 @@ const SignIn = () => {
 
     // handle github btn
     const handleGithubBtn = () => {
-        github()
-            .then(res => {
-                const result = res.user;
-                // console.log(result);
-                const userInfo = {
-                    name: result.displayName,
-                    picture: result.photoURL,
-                    email: result.email,
-                    role: 'student',
-                    gender: null
-                }   
-                fetch('http://localhost:5000/users', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(userInfo)
-                })
-                    .then(res => res.json())
-                    .then(data => {
-                        console.log(data);
-                            successModal('Login Successfully');
-                            navigate('/')
-                    })
-                    .catch(err => errorModal(err.message))
-            })
-            .catch(err => errorModal(err.message))
+        // github()
+        //     .then(res => {
+        //         const result = res.user;
+        //         console.log(result);
+        //         const userInfo = {
+        //             name: result.displayName,
+        //             picture: result.photoURL,
+        //             email: result.email,
+        //             role: 'student',
+        //             gender: null
+        //         }   
+        //         fetch('http://localhost:5000/users', {
+        //             method: 'POST',
+        //             headers: {
+        //                 'Content-Type': 'application/json'
+        //             },
+        //             body: JSON.stringify(userInfo)
+        //         })
+        //             .then(res => res.json())
+        //             .then(data => {
+        //                 console.log(data);
+        //                     successModal('Login Successfully');
+        //                     navigate('/')
+        //             })
+        //             .catch(err => errorModal(err.message))
+        //     })
+        //     .catch(err => errorModal(err.message))
     }
 
 

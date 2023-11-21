@@ -23,7 +23,7 @@ const PopularCourses = () => {
             <div className='grid grid-cols-3 gap-y-16 my-20 justify-items-center'>
                 {
                     courses.map(course => <div
-                        key={course.id}
+                        key={course._id}
                         class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 cursor-pointer">
                         <Link to={'/'}>
                             <img class="rounded-t-lg h-[50%] w-full hover:scale-105" src={course.img} alt="" />
@@ -39,7 +39,7 @@ const PopularCourses = () => {
                                 </div>
                                 <div className='flex gap-2 items-center'>
                                     <FontAwesomeIcon icon={faStar}></FontAwesomeIcon>
-                                    {course.numberOfStudents}
+                                    {course.ratings}
                                     <p>Ratings</p>
                                 </div>
                                 <div className='text-2xl text-primary font-bold'>

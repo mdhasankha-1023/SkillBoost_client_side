@@ -47,10 +47,10 @@ const AuthProvider = ({children}) => {
     }
 
     // authenticate with github
-    const github = () => {
-        setLoading(true)
-        return signInWithPopup(auth, githubProvider)
-    }
+    // const github = () => {
+    //     setLoading(true)
+    //     return signInWithPopup(auth, githubProvider)
+    // }
 
     // signUp with email and password
     const signUpWithEmailAndPassword = (email, password) => {
@@ -72,7 +72,7 @@ const AuthProvider = ({children}) => {
         }) 
 
         return () => {
-            return unSubscribe();``
+            return unSubscribe();
         }
     } , [])
 
@@ -88,7 +88,7 @@ const AuthProvider = ({children}) => {
         successModal,
         errorModal,
         google,
-        github,
+        // github,
         signUpWithEmailAndPassword,
         logInWithEmailAndPassword,
         signOutUser,
