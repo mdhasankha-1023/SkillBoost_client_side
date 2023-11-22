@@ -1,12 +1,31 @@
 import React from 'react';
 import PrimaryTitle from '../../../../Components/PrimaryTitle/PrimaryTitle';
 import useAllCourse from '../../../../Hooks/useAllCourse';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCommentAlt } from '@fortawesome/free-solid-svg-icons';
+import Swal from 'sweetalert2';
 
 const ManageClasses = () => {
     const [data, isPending] = useAllCourse();
 
-    if(isPending){
+    if (isPending) {
         return <p className='text-xl'>Loading...</p>
+    }
+
+    // handle action btn
+    const handleActionBtn = () => {
+        Swal.fire({
+            html: `
+              <div>
+                    <button type="button" class="text-white bg-green-500 hover:bg-green-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Approved</button>
+                    <button type="button" class="text-white bg-red-500 hover:bg-red-700 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2">Denied</button>
+              </div>
+            `,
+            showCloseButton: true,
+            showConfirmButton: false,
+            allowOutsideClick: false, 
+            allowEscapeKey: false,
+        });
     }
 
 
@@ -22,6 +41,9 @@ const ManageClasses = () => {
                     {/* table head */}
                     <thead className="text-lg text-gray-700 bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
+                            <th scope="col" className="px-16 py-3">
+                                #No.
+                            </th>
                             <th scope="col" className="px-16 py-3 text-center">
                                 Image
                             </th>
@@ -52,50 +74,57 @@ const ManageClasses = () => {
                     {/* table body */}
                     <tbody>
                         {
-                            data.map(course => <tr 
-                            key={course._id}
-                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            data.map((course, index) => <tr
+                                key={course._id}
+                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
 
-                            {/* image */}
-                            <td className="p-4">
-                                <img src={course.img} className="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch" />
-                            </td>
+                                {/* NO */}
+                                <td className="p-4 text-lg text-center">
+                                    {index+1}
+                                </td>
 
-                            {/* name */}
-                            <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                                {course.name}
-                            </td>
+                                {/* image */}
+                                <td className="p-4">
+                                    <img src={course.img} className="w-16 md:w-32 max-w-full max-h-full" alt="Apple Watch" />
+                                </td>
 
-                            {/* ins name & email */}
-                            <td className="px-6 py-4 text-center">
-                                {course.instructorName} <br /> {course.instructorEmail}
-                            </td>
+                                {/* name */}
+                                <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
+                                    {course.name}
+                                </td>
 
-                            {/* price */}
-                            <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
-                                ${course.price}
-                            </td>
+                                {/* ins name & email */}
+                                <td className="px-6 py-4 text-center">
+                                    {course.instructorName} <br /> {course.instructorEmail}
+                                </td>
 
-                            {/* available sites */}
-                            <td className="px-6 py-4 text-center">
-                                <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">{course.availableSites}</a>
-                            </td>
+                                {/* price */}
+                                <td className="px-6 py-4 font-semibold text-gray-900 dark:text-white text-center">
+                                    ${course.price}
+                                </td>
 
-                            {/* status */}
-                            <td className="px-6 py-4 text-center">
-                                <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">{course.status}</a>
-                            </td>
+                                {/* available sites */}
+                                <td className="px-6 py-4 text-center">
+                                    {course.availableSites}
+                                </td>
 
-                            {/* action */}
-                            <td className="px-6 py-4">
-                                <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Action</a>
-                            </td>
+                                {/* status */}
+                                <td className="px-6 py-4 text-center">
+                                    {course.status}
+                                </td>
 
-                            {/* feedback btn */}
-                            <td className="px-6 py-4">
-                                <a href="#" className="font-medium text-red-600 dark:text-red-500 hover:underline">Feedback</a>
-                            </td>
-                        </tr>)
+                                {/* action */}
+                                <td className="px-6 py-4">
+                                    <p onClick={handleActionBtn} className="font-medium text-red-600 dark:text-red-500 hover:underline cursor-pointer">Action</p>
+                                </td>
+
+                                {/* feedback btn */}
+                                <td className="px-6 py-4 text-center">
+                                    <div className="font-medium text-xl">
+                                        <FontAwesomeIcon icon={faCommentAlt}></FontAwesomeIcon>
+                                    </div>
+                                </td>
+                            </tr>)
                         }
                     </tbody>
                 </table>

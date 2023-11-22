@@ -1,17 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import PageHeader from '../../Components/PageHeader/PageHeader';
 import PrimaryTitle from '../../Components/PrimaryTitle/PrimaryTitle';
-import { Link } from 'react-router-dom';
+import { Link, useLoaderData } from 'react-router-dom';
 
 const Instructors = () => {
-    const [instructors, setInstructors] = useState([]);
-    useEffect(() => {
-        fetch('/public/teachers.json')
-            .then(res => res.json())
-            .then(data => setInstructors(data))
-    }, [])
-    console.log(instructors);
-
+    const instructors = useLoaderData()
+    
     return (
         <div>
             <PageHeader text={'See the best instructors and buy your course'}></PageHeader>
