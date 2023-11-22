@@ -32,7 +32,8 @@ const AddClass = () => {
                     availableSites: availableSites,
                     numberOfStudents: 0,
                     ratings: 0,
-                    details: courseDetails
+                    details: courseDetails,
+                    status: 'pending'
                 }
 
                 if (data.success) {
