@@ -75,7 +75,7 @@ const Dashboard = () => {
     </>
 
     // fack user
-    const currentUser = 'admin';
+    const currentUser = 'student';
 
 
     return (

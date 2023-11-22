@@ -7,7 +7,7 @@ import useAllUsers from '../../../../Hooks/useAllUsers';
 const ManageUsers = () => {
     const [data, isPending] = useAllUsers();
 
-    if(isPending){
+    if (isPending) {
         return <p clasName='text-lg'>Loading...</p>
     }
 
@@ -31,7 +31,7 @@ const ManageUsers = () => {
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>
                             <th scope="col" className="px-6 py-3">
-
+                                #NO
                             </th>
                             <th scope="col" className="px-6 py-3">
                                 Name
@@ -39,23 +39,22 @@ const ManageUsers = () => {
                             <th scope="col" className="px-6 py-3">
                                 Position
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Status
+                            <th scope="col" className="px-6 py-3 text-center">
+                                Mack <br /> Instructor
                             </th>
-                            <th scope="col" className="px-6 py-3">
-                                Action
+                            <th scope="col" className="px-6 py-3 text-center">
+                                Mack <br /> Admin
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        { data.map(user =>  <tr 
-                        key={user._id}
-                        className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-                            <th scope="row" className="flex items-center px-6 py-4 text-gray-900 whitespace-nowrap dark:text-white">
-                                <img className="w-10 h-10 rounded-full" src={user.picture} alt="Jese image" />
+                        {data.map((user, indx) => <tr
+                            key={user._id}
 
-                            </th>
-                            <td className="px-6 py-4">
+                            className="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+                            <td className='px-6 py-4'>{indx + 1}</td>
+                            <td className="px-6 py-4 flex items-center text-gray-900">
+                                <img className="w-10 h-10 rounded-full" src={user.picture} alt="Jese image" />
                                 <div className="ps-3">
                                     <div className="text-base font-semibold">{user.name}</div>
                                     <div className="font-normal text-gray-500">{user.email}</div>
@@ -63,6 +62,12 @@ const ManageUsers = () => {
                             </td>
                             <td className="px-6 py-4">
                                 {user.role}
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                                <button type="button" class="text-white bg-green-500 hover:bg-green-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2 ">Instructor</button>
+                            </td>
+                            <td className="px-6 py-4 text-center">
+                                <button type="button" class="text-white bg-red-500 hover:bg-red-700 font-medium rounded-full text-sm px-5 py-2.5 text-center me-2 mb-2">Admin</button>
                             </td>
                         </tr>)
 

@@ -1,6 +1,14 @@
 [
     {
-        "id" : 1,
+      "id" : 0,
+      "insName": "John Smith",
+      "insImg": "https://t3.ftcdn.net/jpg/05/57/35/54/360_F_557355484_m6hSlsoImUnzPQPC6d295zcFE3bsyFnF.jpg",
+      "insEmail": "johnsmith@email.com",
+      "numberOfClasses": 2,
+      "classesName": ["Introduction to Programming with Python", "Web Development with HTML, CSS, and JavaScript"]
+    },
+    {
+      "id" : 1,
       "insName": "John Smith",
       "insImg": "https://t3.ftcdn.net/jpg/05/57/35/54/360_F_557355484_m6hSlsoImUnzPQPC6d295zcFE3bsyFnF.jpg",
       "insEmail": "johnsmith@email.com",
